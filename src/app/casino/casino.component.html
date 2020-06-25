@@ -1,0 +1,11 @@
+<div class="games-box">
+  <mat-grid-list cols="5" rowHeight="300px">
+      <ng-container>
+        <mat-grid-tile *ngFor="let g of games">
+          <div class="casino-img">
+          <img mat-card-image src="./assets/img/{{ g.id}}.png" alt="g.name">
+          </div>
+        </mat-grid-tile>
+      </ng-container>
+  </mat-grid-list>
+</div>
