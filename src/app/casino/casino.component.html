@@ -8,4 +8,5 @@
         </mat-grid-tile>
       </ng-container>
   </mat-grid-list>
+  <app-pagination [totalPages]="totalPages"  (changePage)="listItems($event)"></app-pagination>
 </div>

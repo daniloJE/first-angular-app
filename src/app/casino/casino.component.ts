@@ -9,17 +9,21 @@ import {GameService} from '../game.service';
 })
 export class CasinoComponent implements OnInit {
   games;
-
+  totalPages;
   constructor(private gamesService: GameService) {
   }
-
   ngOnInit(): void {
-    this.gamesService.getAll().subscribe(
-      (data: any[]) => {
+    this.listItems(1);
+  }
+
+  listItems(pageNumber: any) {
+    this.gamesService.getAll(pageNumber, 20).subscribe(
+      (data) => {
         console.log(data);
-        this.games = data;
+        // .headers.get('X-Total-Count'
+        this.totalPages = Math.ceil(data.headers.get('X-Total-Count') / 20);
+        this.games = data.body;
       }
     );
   }
-
 }

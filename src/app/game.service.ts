@@ -12,7 +12,8 @@ export class GameService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(): Observable<any> {
-    return this.http.get(this.url);
+  getAll(pageNumber, limit): Observable<any> {
+    // posts?_page=page&_limit=20'
+    return this.http.get(this.url + '?_page=' + pageNumber + '&_limit=' + limit, {observe: 'response'} );
   }
 }

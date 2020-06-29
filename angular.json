@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "casino"
+  "defaultProject": "casino",
+  "cli": {
+    "analytics": "1efd1f59-dea7-426b-a37a-e3c4cff85bef"
+  }
 }

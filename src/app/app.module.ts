@@ -16,6 +16,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { PaginationComponent } from './shared/pagination/pagination.component';
 
 
 
@@ -24,7 +25,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     AppComponent,
     HeaderComponent,
     CasinoComponent,
-    HomeComponent
+    HomeComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
