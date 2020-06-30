@@ -1,4 +1,19 @@
-<button class="btn btn-primary" (click)="previousPage()">Previous</button>
-{{ currentPage }}
-{{ totalPages }}
-<button class="btn btn-primary"(click)="nextPage()">Next</button>
+<!--<ul>-->
+<!--  <li  *ngFor="let page of totalNumber(totalPages)">-->
+<!--    <ng-container *ngIf="(totalPages-(page+1) > 1); then dots else pageNumber ">-->
+<!--    </ng-container>-->
+<!--&lt;!&ndash;    <a  [ngClass]="{ 'disabled' : currentPage===page }" (click)="toThePage(page)">{{ page }}</a>&ndash;&gt;-->
+<!--      <ng-template #dots>-->
+<!--        <span>...</span>-->
+<!--      </ng-template>-->
+<!--      <ng-template #pageNumber>-->
+<!--        <a  [ngClass]="{ 'disabled' : currentPage===page }" (click)="toThePage(page)">{{ page }}</a>-->
+<!--      </ng-template>-->
+<!--  </li>-->
+<!--</ul>-->
+
+<ul>
+  <li *ngFor="let page of pages">
+    <a (click)="toThePage(page)">{{ page }}</a>
+  </li>
+</ul>
