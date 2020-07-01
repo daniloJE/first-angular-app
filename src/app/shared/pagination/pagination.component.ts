@@ -1,11 +1,11 @@
-import {Component, OnInit, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
+import {Component, OnInit, EventEmitter, Input, Output, SimpleChanges, OnChanges} from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnChanges {
   @Input() currentPage = 1;
   @Input() totalPages;
   @Input() halfOfTotalPages: number = Math.round(this.totalPages / 2);
@@ -22,6 +22,9 @@ export class PaginationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
     this.whichNumber(this.currentPage);
   }
 
@@ -35,29 +38,33 @@ export class PaginationComponent implements OnInit {
 
   whichNumber(page) {
     this.pages = [];
-    if (page < 1 && page > 8) {
-      return;
-    }
     if (page === 1) {
-      this.pages.push(page, page + 1, this.stringy, 8);
-    } else if (page > 1 && page < Math.round(this.totalPages / 2)) {
-      if (page === 2) {
-        this.pages.push(page - 1, page, page + 1, this.stringy, this.totalPages);
-      } else if (page === 3) {
-        this.pages.push(1, page - 1, page, page + 1, this.stringy, this.totalPages);
-      }
-    } else if (page === 4) {
-      this.pages.push(1, this.stringy, page, page + 1, page + 2, this.stringy, this.totalPages);
-    } else if (page > Math.round(this.totalPages / 2) && page < this.totalPages) {
-      if (page + 1 === this.totalPages) {
-        this.pages.push(1, this.stringy, page - 1, page, page + 1);
+      this.pages.push(page + 1, this.stringy);
+    } else if (page > 1 && page < 4) {
+      if (page === 3) {
+        this.pages.push(page - 1, page, page + 1, this.stringy);
       } else {
-        this.pages.push(1,this.stringy, page - 1, page, page + 1, this.stringy, this.totalPages);
+        this.pages.push(page, page + 1, this.stringy);
+      }
+    } else if (page >= 4 && page < this.totalPages - 2) {
+      this.pages.push(this.stringy, page - 1, page, page + 1, this.stringy);
+    } else if (page >= this.totalPages - 2) {
+      if (page === this.totalPages - 1) {
+        this.pages.push(this.stringy, page);
+      } else if (page === this.totalPages) {
+        this.pages.push(this.stringy, page - 1);
+      } else if (page === this.totalPages - 2) {
+        this.pages.push(this.stringy, page - 1, page, page + 1);
+      } else {
+        this.pages.push(this.stringy, page - 1, page, this.stringy);
       }
     }
-    if (page === this.totalPages) {
-      this.pages.push(1,this.stringy, page - 1, this.totalPages);
+
+    if (!this.pages.includes(1) && !this.pages.includes(this.totalPages)) {
+      this.pages.unshift(1);
+      this.pages.push(this.totalPages);
     }
+    return this.pages;
   }
 
 

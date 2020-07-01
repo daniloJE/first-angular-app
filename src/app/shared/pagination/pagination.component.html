@@ -13,7 +13,20 @@
 <!--</ul>-->
 
 <ul>
-  <li *ngFor="let page of pages">
-    <a (click)="toThePage(page)">{{ page }}</a>
-  </li>
+  <ng-container *ngIf="currentPage!=1">
+  <button class="mat-raised-button" (click)="toThePage(currentPage-1)">Previous</button>
+  </ng-container>
+  <ng-container *ngFor="let page of pages">
+    <ng-container *ngIf="page != stringy;then without; else with">
+    </ng-container>
+    <ng-template #without>
+      <a [ngClass]="{ 'disabled' : currentPage===page }" (click)="toThePage(page)">{{ page }}</a>
+    </ng-template>
+    <ng-template #with>
+      <span>{{ page }}</span>
+    </ng-template>
+  </ng-container>
+  <ng-container *ngIf="currentPage!=totalPages">
+  <button class="mat-raised-button" (click)="toThePage(currentPage+1)">Next</button>
+  </ng-container>
 </ul>
